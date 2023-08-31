@@ -1,2 +1,2 @@
-#!/bin/bish
-chmod -R +x .
+#!/bin/bash
+chmod -R a+x .
