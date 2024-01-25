@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# This script tells a story based on the content of /etc/passwd
+
+while IFS=':' read -r username uid homedir shell; do
+    if [[ -n "$shell" && "$shell" != "/usr/sbin/nologin" && "$shell" != "/bin/false" ]]; then
+        echo "The user $username is part of the $uid gang, lives in $homedir and rides $shell. $uid's place is protected by the passcode x, more info about the user here: $username"
+    fi
+done < /etc/passwd
