@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# This script displays the content of /etc/passwd with specific user information
+
+while IFS=':' read -r username uid homedir _ shell; do
+    if [[ -n "$shell" && "$shell" != "/usr/sbin/nologin" && "$shell" != "/bin/false" ]]; then
+        echo "$username:$uid:$homedir"
+    fi
+done < /etc/passwd
