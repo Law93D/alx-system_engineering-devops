@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC2009
+# This script shows the PID of the Bash process
+ps aux | grep bash | grep -v grep
