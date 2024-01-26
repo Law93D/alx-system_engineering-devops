@@ -5,16 +5,22 @@ signal_handler() {
     case $1 in
         SIGTERM)
             echo "I hate the kill command"
+            cleanup
             ;;
         SIGINT)
             echo "Y U no love me?!"
             ;;
         SIGQUIT)
-            echo "Y U no love me?!"
-            rm /var/run/myscript.pid
-            exit
+            cleanup
             ;;
     esac
+}
+
+# Function to clean up and terminate the script
+cleanup() {
+    rm /var/run/myscript.pid
+    echo "Script terminated"
+    exit
 }
 
 # Set up signal handlers
@@ -28,5 +34,5 @@ echo $$ > /var/run/myscript.pid
 # Display message indefinitely
 while true; do
     echo "To infinity and beyond"
-    sleep 2
+    sleep 1
 done
