@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Function to handle signals
+signal_handler() {
+    case $1 in
+        SIGTERM)
+            echo "I hate the kill command"
+            ;;
+        SIGINT)
+            echo "Y U no love me?!"
+            ;;
+        SIGQUIT)
+            echo "Y U no love me?!"
+            rm /var/run/myscript.pid
+            exit
+            ;;
+    esac
+}
+
+# Set up signal handlers
+trap 'signal_handler SIGTERM' SIGTERM
+trap 'signal_handler SIGINT' SIGINT
+trap 'signal_handler SIGQUIT' SIGQUIT
+
+# Create PID file
+echo $$ > /var/run/myscript.pid
+
+# Display message indefinitely
+while true; do
+    echo "To infinity and beyond"
+    sleep 2
+done
