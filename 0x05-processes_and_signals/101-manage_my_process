@@ -1,4 +1,5 @@
 #!/bin/bash
+#manages the script manage_my_process
 
 # Function to start the process
 start_process() {

@@ -1,4 +1,6 @@
 #!/bin/bash
+#indefinitely writes "l am alive" to the file /tmp/my_process
+#pauses two seconds in between the messages
 
 while true; do
     echo "I am alive!" >> /tmp/my_process
