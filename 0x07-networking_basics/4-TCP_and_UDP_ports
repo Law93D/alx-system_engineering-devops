@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# This script displays listening ports along with PID and program name.
+
+echo "Active Internet connections (only servers)"
+echo "Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name"
+
+# Display TCP listening sockets
+ss -tuln | awk '$6 == "LISTEN" && $1 == "tcp" {print $1, $4, "*", $6}' | while read line; do
+  port=$(echo "$line" | awk '{print $2}' | awk -F ':' '{print $2}')
+  pid=$(echo "$line" | awk '{print $4}' | awk -F ',' '{print $1}')
+  pname=$(ps -p "$pid" -o comm=)
+  echo "$line                     LISTEN      $pid/$pname"
+done
+
+# Display UDP listening sockets
+ss -uln | awk '$1 == "udp" {print $1, $4, "*", $6}' | while read line; do
+  port=$(echo "$line" | awk '{print $2}' | awk -F ':' '{print $2}')
+  pid=$(echo "$line" | awk '{print $4}' | awk -F ',' '{print $1}')
+  pname=$(ps -p "$pid" -o comm=)
+  echo "$line                              $pid/$pname"
+done
