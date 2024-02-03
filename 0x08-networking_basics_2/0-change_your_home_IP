@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# This script changes the IP configuration for localhost and facebook.com
+
+# Modify the /etc/hosts file
+sudo sed -i 's/127.0.0.1 localhost/127.0.0.2 localhost/' /etc/hosts
+sudo sed -i 's/facebook.com/8.8.8.8 facebook.com/' /etc/hosts
+
+# Display success message
+echo "IP configuration updated successfully!"
