@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# This script listens on port 98 on localhost using netcat
+
+# Listen on port 98 and print received data
+nc -l 127.0.0.1 98
