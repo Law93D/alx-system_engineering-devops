@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# This script displays all active IPv4 IPs on the machine
+
+# Use ip to get active IPs and filter IPv4 addresses
+active_ips=$(ip -4 addr show | grep -oP 'inet\s+\K[^\s]+')
+
+# Display the IPs
+echo "$active_ips"
