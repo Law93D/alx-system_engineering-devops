@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Configure Apache to serve a page containing "Hello Holberton"
+
+# Install Apache
+apt-get update
+apt-get install -y apache2
+
+# Start Apache
+service apache2 start
+
+# Create a simple HTML file containing "Hello Holberton"
+echo "Hello Holberton" > /var/www/html/index.html
+
+# Ensure Apache is running
+service apache2 restart
