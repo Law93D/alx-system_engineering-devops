@@ -24,3 +24,6 @@ echo 'server {
 
 # Restart Nginx to apply changes
 sudo systemctl restart nginx
+
+# Output confirmation
+echo "Your web servers are now configured to return a custom X-Served-By header."
