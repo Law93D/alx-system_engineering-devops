@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# This script displays information about subdomains for a given domain
+
+# Check if domain and subdomain arguments are provided
+if [ $# -lt 1 ]; then
+    echo "Usage: $0 <domain> [subdomain]"
+    exit 1
+fi
+
+domain="$1"
+subdomain="$2"
+
+# Function to get DNS information for a subdomain
+get_dns_info() {
+    subdomain="$1"
+    dig_output=$(dig "$subdomain.$domain" +short)
+    record_type=$(echo "$dig_output" | awk 'NR==1 {print $2}')
+    destination=$(echo "$dig_output" | awk 'NR==1 {print $1}')
+    echo "The subdomain $subdomain is a $record_type record and points to $destination"
+}
+
+# If subdomain is provided, get information for that subdomain
+if [ -n "$subdomain" ]; then
+    get_dns_info "$subdomain"
+else
+    # Get information for default subdomains
+    get_dns_info "www"
+    get_dns_info "lb-01"
+    get_dns_info "web-01"
+    get_dns_info "web-02"
+fi
