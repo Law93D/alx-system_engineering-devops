@@ -1,0 +1,20 @@
+# File: 1-haproxy_ssl_termination
+
+frontend http_front
+    bind *:80
+    mode http
+    option forwardfor
+    reqadd X-Forwarded-Proto:\ http
+    default_backend http_back
+
+frontend https_front
+    bind *:443 ssl crt /etc/haproxy/certs/holberton.pem
+    mode http
+    option forwardfor
+    reqadd X-Forwarded-Proto:\ https
+    default_backend http_back
+
+backend http_back
+    mode http
+    server web-01 34.227.93.156 check
+    server web-02 3.85.136.88 check
