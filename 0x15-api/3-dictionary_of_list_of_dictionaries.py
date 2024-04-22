@@ -8,6 +8,7 @@ from the JSONPlaceholder API and exports the data to a JSON file.
 
 import json
 import requests
+from sys import argv
 
 
 def fetch_user_data():
